@@ -1,0 +1,137 @@
+<form [formGroup]="producerForm" (ngSubmit)="onSubmit()">
+  <mat-grid-list cols="3" rowHeight="5:1">
+    <mat-grid-tile>
+      <mat-form-field class="example-full-width">
+        <mat-label>CPF ou CNPJ</mat-label>
+        <input
+          matInput
+          type="text"
+          id="cpfCnpj"
+          formControlName="cpfCnpj"
+          placeholder="Informe o CPF ou CNPJ"
+          [mask]="'000.000.000-00 || 00.000.000/0000-00'"
+          required
+        />
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field class="example-full-width">
+        <mat-label>Nome do Produtor</mat-label>
+        <input
+          matInput
+          type="text"
+          id="name"
+          formControlName="name"
+          placeholder="Informe o nome do produtor"
+          required
+        />
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field class="example-full-width">
+        <mat-label>Nome da Fazenda</mat-label>
+        <input
+          matInput
+          type="text"
+          id="farmName"
+          formControlName="farmName"
+          placeholder="Informe o nome da fazenda"
+          required
+        />
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field class="example-full-width">
+        <mat-label>Cidade</mat-label>
+        <input
+          matInput
+          type="text"
+          id="city"
+          formControlName="city"
+          placeholder="Informe a cidade"
+          required
+        />
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field class="example-full-width">
+        <mat-label>Estado</mat-label>
+        <input
+          matInput
+          type="text"
+          id="state"
+          formControlName="state"
+          placeholder="Informe o estado"
+          required
+        />
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field class="example-full-width">
+        <mat-label>Área Total (Hectares)</mat-label>
+        <input
+          matInput
+          type="number"
+          id="totalArea"
+          formControlName="totalArea"
+          placeholder="Informe a área total"
+          required
+        />
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field class="example-full-width">
+        <mat-label>Área Agricultável (Hectares)</mat-label>
+        <input
+          matInput
+          type="number"
+          id="agriculturalArea"
+          formControlName="agriculturalArea"
+          placeholder="Informe a área agricultável"
+          required
+        />
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field class="example-full-width">
+        <mat-label>Área de Vegetação (Hectares)</mat-label>
+        <input
+          matInput
+          type="number"
+          id="vegetationArea"
+          formControlName="vegetationArea"
+          placeholder="Informe a área de vegetação"
+          required
+        />
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field class="example-full-width">
+        <mat-label>Culturas Plantadas</mat-label>
+        <mat-select id="crops" formControlName="crops" multiple>
+          <!-- Opções para culturas plantadas (Soja, Milho, Algodão, Café, Cana de Açúcar) -->
+          <mat-option value="Soja">Soja</mat-option>
+          <mat-option value="Milho">Milho</mat-option>
+          <mat-option value="Algodão">Algodão</mat-option>
+          <mat-option value="Café">Café</mat-option>
+          <mat-option value="Cana de Açúcar">Cana de Açúcar</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="example-button-row">
+        <button type="submit" class="mat-raised-button mat-primary">
+          Cadastrar Produtor
+        </button>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>
