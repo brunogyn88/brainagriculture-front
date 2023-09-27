@@ -16,9 +16,16 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { EffectsModule } from '@ngrx/effects';
 import { ProducerEffects } from './state/producer/producer.effects';
 import { HttpClientModule } from '@angular/common/http';
+import { PlantedCropEffects } from './state/planted-crop/planted-crop.effects';
+import { plantedCropReducer } from './state/planted-crop/planted-crop.reducer';
+import { ProducerListComponent } from './components/producer-list/producer-list.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { producerReducer } from './state/producer/producer.reducer';
 
 @NgModule({
-  declarations: [AppComponent, ProducerFormComponent],
+  declarations: [AppComponent, ProducerFormComponent, ProducerListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -30,9 +37,16 @@ import { HttpClientModule } from '@angular/common/http';
     MatSelectModule,
     MatFormFieldModule,
     MatGridListModule,
+    MatTableModule,
+    MatIconModule,
+    MatDialogModule,
     NgxMaskDirective,
     NgxMaskPipe,
-    EffectsModule.forRoot([ProducerEffects]),
+    EffectsModule.forRoot([ProducerEffects, PlantedCropEffects]),
+    StoreModule.forRoot({
+      plantedCrop: plantedCropReducer,
+      producer: producerReducer,
+    }),
     HttpClientModule,
   ],
   providers: [provideNgxMask()],

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import * as ProducerActions from './producer.actions';
 import { ProducerService } from 'src/app/services/producer.service';
 import { createProducer } from 'src/app/state/producer/producer.actions';
@@ -46,15 +46,31 @@ export class ProducerEffects {
     )
   );
 
-  loadPlantedCrops$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(ProducerActions.loadPlantedCrops),
-      switchMap(() =>
-        this.producerService.getPlantedCrops().pipe(
-          map((crops) => ProducerActions.loadPlantedCropsSuccess({ crops })),
-          catchError((error) =>
-            of(ProducerActions.loadPlantedCropsFailure({ error }))
-          )
+  editProducer$ = this.actions$.pipe(
+    ofType(ProducerActions.editProducer),
+    mergeMap((action) =>
+      this.producerService.updateProducer(action.producer).pipe(
+        map((updatedProducer) =>
+          ProducerActions.editProducerSuccess({ producer: updatedProducer })
+        ),
+        catchError((error) =>
+          of(ProducerActions.editProducerFailure({ error }))
+        )
+      )
+    )
+  );
+
+  deleteProducer$ = this.actions$.pipe(
+    ofType(ProducerActions.deleteProducer),
+    mergeMap((action) =>
+      this.producerService.deleteProducer(action.producerId).pipe(
+        map(() =>
+          ProducerActions.deleteProducerSuccess({
+            producerId: action.producerId,
+          })
+        ),
+        catchError((error) =>
+          of(ProducerActions.deleteProducerFailure({ error }))
         )
       )
     )

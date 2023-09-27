@@ -21,8 +21,8 @@
         <input
           matInput
           type="text"
-          id="name"
-          formControlName="name"
+          id="producerName"
+          formControlName="producerName"
           placeholder="Informe o nome do produtor"
           required
         />
@@ -77,8 +77,8 @@
         <input
           matInput
           type="number"
-          id="totalArea"
-          formControlName="totalArea"
+          id="totalAreaHectaresFarm"
+          formControlName="totalAreaHectaresFarm"
           placeholder="Informe a área total"
           required
         />
@@ -91,8 +91,8 @@
         <input
           matInput
           type="number"
-          id="agriculturalArea"
-          formControlName="agriculturalArea"
+          id="arableAreaHectares"
+          formControlName="arableAreaHectares"
           placeholder="Informe a área agricultável"
           required
         />
@@ -105,8 +105,8 @@
         <input
           matInput
           type="number"
-          id="vegetationArea"
-          formControlName="vegetationArea"
+          id="vegetationAreaHectares"
+          formControlName="vegetationAreaHectares"
           placeholder="Informe a área de vegetação"
           required
         />
@@ -116,8 +116,7 @@
     <mat-grid-tile>
       <mat-form-field class="example-full-width">
         <mat-label>Culturas Plantadas</mat-label>
-        <mat-select id="crops" formControlName="crops" multiple>
-          <!-- Opções para culturas plantadas (Soja, Milho, Algodão, Café, Cana de Açúcar) -->
+        <mat-select id="plantedCrops" formControlName="plantedCrops" multiple>
           <mat-option
             *ngFor="let crop of plantedCrops$ | async"
             [value]="crop.id"
@@ -128,7 +127,7 @@
     </mat-grid-tile>
     <mat-grid-tile>
       <div class="example-button-row">
-        <button type="submit" class="mat-raised-button mat-primary">
+        <button type="submit" mat-raised-button color="primary">
           Cadastrar Produtor
         </button>
       </div>

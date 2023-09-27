@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Producer } from '../models/producer.model';
-import { PlantedCrop } from '../models/planted-crop.model';
 
 @Injectable({
   providedIn: 'root',
@@ -25,12 +24,8 @@ export class ProducerService {
     return this.http.put<Producer>(url, produtor);
   }
 
-  deleteProducer(id: number): Observable<void> {
+  deleteProducer(id: string | undefined): Observable<void> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.delete<void>(url);
-  }
-
-  getPlantedCrops(): Observable<PlantedCrop[]> {
-    return this.http.get<PlantedCrop[]>(`${this.apiUrl}/plantedcrop`);
   }
 }

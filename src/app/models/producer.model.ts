@@ -1,5 +1,5 @@
 export interface Producer {
-  id?: number;
+  id?: string;
   cpfCnpj: string;
   name: string;
   farmName: string;
@@ -8,5 +8,5 @@ export interface Producer {
   totalArea: number;
   agriculturalArea: number;
   vegetationArea: number;
-  crops: string[];
+  plantedCrops: string[];
 }
