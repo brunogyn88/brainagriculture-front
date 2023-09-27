@@ -118,11 +118,11 @@
         <mat-label>Culturas Plantadas</mat-label>
         <mat-select id="crops" formControlName="crops" multiple>
           <!-- Opções para culturas plantadas (Soja, Milho, Algodão, Café, Cana de Açúcar) -->
-          <mat-option value="Soja">Soja</mat-option>
-          <mat-option value="Milho">Milho</mat-option>
-          <mat-option value="Algodão">Algodão</mat-option>
-          <mat-option value="Café">Café</mat-option>
-          <mat-option value="Cana de Açúcar">Cana de Açúcar</mat-option>
+          <mat-option
+            *ngFor="let crop of plantedCrops$ | async"
+            [value]="crop.id"
+            >{{ crop.cropname }}</mat-option
+          >
         </mat-select>
       </mat-form-field>
     </mat-grid-tile>

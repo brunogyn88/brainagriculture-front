@@ -2,9 +2,13 @@
 
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Producer } from 'src/app/models/producer.model';
-import { addProducer } from 'src/app/state/producer/producer.actions';
+import {
+  createProducer,
+  loadPlantedCrops,
+} from 'src/app/state/producer/producer.actions';
+import { selectPlantedCrops } from 'src/app/state/producer/producer.selectors';
 
 @Component({
   selector: 'app-producer-form',
@@ -13,6 +17,7 @@ import { addProducer } from 'src/app/state/producer/producer.actions';
 })
 export class ProducerFormComponent {
   producerForm: FormGroup;
+  plantedCrops$ = this.store.pipe(select(selectPlantedCrops));
 
   constructor(private formBuilder: FormBuilder, private store: Store) {
     this.producerForm = this.formBuilder.group({
@@ -24,14 +29,18 @@ export class ProducerFormComponent {
       totalArea: [0, Validators.required],
       agriculturalArea: [0, Validators.required],
       vegetationArea: [0, Validators.required],
-      crops: [[]], // You can use a multi-select component or other form control for selecting multiple crops
+      crops: [[]],
     });
+  }
+
+  ngOnInit(): void {
+    this.store.dispatch(loadPlantedCrops());
   }
 
   onSubmit() {
     if (this.producerForm.valid) {
       const newProducer: Producer = this.producerForm.value;
-      this.store.dispatch(addProducer({ producer: newProducer }));
+      this.store.dispatch(createProducer({ producer: newProducer }));
       this.producerForm.reset();
     }
   }
