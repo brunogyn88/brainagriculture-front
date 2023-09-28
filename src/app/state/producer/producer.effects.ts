@@ -47,31 +47,36 @@ export class ProducerEffects {
     )
   );
 
-  editProducer$ = this.actions$.pipe(
-    ofType(ProducerActions.editProducer),
-    mergeMap((action) =>
-      this.producerService.updateProducer(action.producer).pipe(
-        map((updatedProducer) =>
-          ProducerActions.editProducerSuccess({ producer: updatedProducer })
-        ),
-        catchError((error) =>
-          of(ProducerActions.editProducerFailure({ error }))
+  editProducer$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProducerActions.editProducer),
+      mergeMap((action) =>
+        this.producerService.updateProducer(action.producer).pipe(
+          map((updatedProducer) =>
+            ProducerActions.editProducerSuccess({ producer: updatedProducer })
+          ),
+          catchError((error) =>
+            of(ProducerActions.editProducerFailure({ error }))
+          )
         )
       )
     )
   );
 
-  deleteProducer$ = this.actions$.pipe(
-    ofType(ProducerActions.deleteProducer),
-    mergeMap((action) =>
-      this.producerService.deleteProducer(action.producerId).pipe(
-        map(() =>
-          ProducerActions.deleteProducerSuccess({
-            producerId: action.producerId,
-          })
-        ),
-        catchError((error) =>
-          of(ProducerActions.deleteProducerFailure({ error }))
+  deleteProducer$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProducerActions.deleteProducer),
+      tap(() => console.log('deleteProducer effect activated')),
+      mergeMap((action) =>
+        this.producerService.deleteProducer(action.producerId).pipe(
+          map(() =>
+            ProducerActions.deleteProducerSuccess({
+              producerId: action.producerId,
+            })
+          ),
+          catchError((error) =>
+            of(ProducerActions.deleteProducerFailure({ error }))
+          )
         )
       )
     )

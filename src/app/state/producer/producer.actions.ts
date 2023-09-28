@@ -1,5 +1,4 @@
 import { createAction, props } from '@ngrx/store';
-import { PlantedCrop } from 'src/app/models/planted-crop.model';
 import { Producer } from 'src/app/models/producer.model';
 
 export const createProducer = createAction(
