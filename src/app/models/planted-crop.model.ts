@@ -1,4 +1,4 @@
 export interface PlantedCrop {
-  id: number;
+  id: string;
   cropname: string;
 }

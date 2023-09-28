@@ -8,7 +8,8 @@ describe('ProducerListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ProducerListComponent]
+      declarations: [ProducerListComponent],
+      imports: [],
     });
     fixture = TestBed.createComponent(ProducerListComponent);
     component = fixture.componentInstance;

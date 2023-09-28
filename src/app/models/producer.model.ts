@@ -1,12 +1,12 @@
 export interface Producer {
   id?: string;
   cpfCnpj: string;
-  name: string;
+  producerName: string;
   farmName: string;
   city: string;
   state: string;
-  totalArea: number;
-  agriculturalArea: number;
-  vegetationArea: number;
+  totalAreaHectaresFarm: number;
+  arableAreaHectares: number;
+  vegetationAreaHectares: number;
   plantedCrops: string[];
 }
