@@ -1,7 +1,9 @@
-<mat-table [dataSource]="producers$">
-  <ng-container matColumnDef="name">
+<mat-table [dataSource]="dataSource">
+  <ng-container matColumnDef="producername">
     <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
-    <mat-cell *matCellDef="let producer"> {{ producer.name }} </mat-cell>
+    <mat-cell *matCellDef="let producer">
+      {{ producer.producername }}
+    </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="city">

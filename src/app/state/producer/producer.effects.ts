@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import * as ProducerActions from './producer.actions';
 import { ProducerService } from 'src/app/services/producer.service';
 import { createProducer } from 'src/app/state/producer/producer.actions';
@@ -17,6 +17,7 @@ export class ProducerEffects {
   loadProducers$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ProducerActions.loadProducers),
+      tap(() => console.log('loadProducers effect activated')),
       switchMap(() =>
         this.producerService.getProducers().pipe(
           map((producers: Producer[]) =>

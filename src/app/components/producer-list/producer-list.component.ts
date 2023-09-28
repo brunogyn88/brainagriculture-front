@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Producer } from 'src/app/models/producer.model';
 import {
   deleteProducer,
@@ -15,14 +16,20 @@ import { selectProducers } from 'src/app/state/producer/producer.selectors';
   styleUrls: ['./producer-list.component.scss'],
 })
 export class ProducerListComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'city', 'actions'];
-  producers$ = this.store.pipe(select(selectProducers));
+  displayedColumns: string[] = ['producername', 'city', 'actions'];
+  producers$: Observable<Producer[]>;
+  dataSource: MatTableDataSource<Producer>;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store) {
+    this.producers$ = this.store.pipe(select(selectProducers));
+    this.dataSource = new MatTableDataSource();
+  }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<any> {
     this.store.dispatch(loadProducers());
-    console.log(this.producers$);
+    await this.producers$.subscribe((producers) => {
+      this.dataSource.data = producers;
+    });
   }
 
   editarProdutor(producer: Producer): void {
